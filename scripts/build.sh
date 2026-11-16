@@ -11,8 +11,10 @@ ED_PUBLIC_KEY="94iIAyJFLZIGs98sgDathRSb/q7Q1OGi0tyrW3m8F98="
 
 swift build -c release --arch arm64
 BIN=$(swift build -c release --arch arm64 --show-bin-path)
-APP=dist/Folga.app
-rm -rf "$APP" && mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
+# Assemble and sign outside iCloud Drive: it keeps adding extended attributes that codesign rejects.
+STAGE=$(mktemp -d)
+APP="$STAGE/Folga.app"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
 cp "$BIN/Folga" "$APP/Contents/MacOS/Folga"
 ditto "$BIN/Sparkle.framework" "$APP/Contents/Frameworks/Sparkle.framework"
 
@@ -44,6 +46,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 PLIST
 
 if security find-certificate -c "$SIGN_ID" >/dev/null 2>&1; then ID="$SIGN_ID"; else ID="-"; echo "Aviso: certificado '$SIGN_ID' não encontrado; assinando ad-hoc."; fi
+xattr -cr "$APP"
 # Inside out: Sparkle's helpers, the framework, then the app.
 FW="$APP/Contents/Frameworks/Sparkle.framework/Versions/B"
 for item in "$FW"/XPCServices/*.xpc "$FW/Autoupdate" "$FW/Updater.app" "$APP/Contents/Frameworks/Sparkle.framework"; do
@@ -51,4 +54,6 @@ for item in "$FW"/XPCServices/*.xpc "$FW/Autoupdate" "$FW/Updater.app" "$APP/Con
 done
 codesign --force --sign "$ID" --timestamp=none "$APP"
 codesign --verify --deep --strict "$APP"
-echo "Pronto: $APP ($MARKETING_VERSION, build $BUILD_NUMBER, assinado com: $ID)"
+mkdir -p dist && rm -rf dist/Folga.app && ditto "$APP" dist/Folga.app && rm -rf "$STAGE"
+codesign --verify --deep --strict dist/Folga.app
+echo "Pronto: dist/Folga.app ($MARKETING_VERSION, build $BUILD_NUMBER, assinado com: $ID)"

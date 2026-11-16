@@ -25,3 +25,8 @@
 - **Problema:** `.build/release/Folga --report` falhava com `Library not loaded: @rpath/Sparkle.framework`.
 - **Causa:** o rpath só tinha `@executable_path/../Frameworks` (layout do `.app`); no `swift build` o framework fica ao lado do binário.
 - **Solução:** adicionar também `-rpath @executable_path` no `Package.swift`.
+
+## 2026-11-16 — codesign recusa assinar dentro do iCloud Drive
+- **Problema:** `resource fork, Finder information, or similar detritus not allowed` ao assinar `dist/Folga.app`.
+- **Causa:** o iCloud Drive grava atributos estendidos nos arquivos e volta a gravar mesmo depois de um `xattr -cr`.
+- **Solução:** `build.sh` monta e assina o `.app` numa pasta temporária fora do iCloud e só então copia (`ditto`) para `dist/`.

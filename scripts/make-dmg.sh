@@ -3,13 +3,16 @@
 set -euo pipefail
 cd "${0:A:h}/.."
 
-./scripts/build.sh
+[ -n "${SKIP_BUILD:-}" ] || ./scripts/build.sh   # SKIP_BUILD=1 reuses dist/Folga.app
 source ./version.env; VERSION=$MARKETING_VERSION
 DMG="dist/Folga-$VERSION.dmg"
 STAGE=$(mktemp -d)/Folga
 
 mkdir -p "$STAGE"
-cp -R dist/Folga.app "$STAGE/"
+# No extended attributes: iCloud Drive adds some that break strict signature checks.
+ditto --noextattr --norsrc dist/Folga.app "$STAGE/Folga.app"
+xattr -cr "$STAGE/Folga.app"
+codesign --verify --deep --strict "$STAGE/Folga.app"
 ln -s /Applications "$STAGE/Aplicativos"
 cat > "$STAGE/Como abrir.txt" <<TXT
 Folga $VERSION — Apple silicon, macOS 14 ou mais novo

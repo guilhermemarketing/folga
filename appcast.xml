@@ -13,7 +13,7 @@
       <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
       <description><![CDATA[<p>Corrige o espaço vazio entre a barra de menus e a janela do Folga (aparecia depois de recolher Desenvolvimento). README agora também em inglês, licença MIT e guia de contribuição.</p>]]></description>
-      <enclosure url="https://github.com/guilhermemarketing/folga/releases/download/v1.2/Folga-1.2.dmg" type="application/octet-stream" sparkle:edSignature="B6m6p/1XLUYrojAyPgSDkVT9NS0MrEo+bBwsTmWrMMalbvfeXeoU+z4PFmsLpCH4TEr328tTahvAIJ7h9RnQCQ==" length="1388836"/>
+      <enclosure url="https://github.com/guilhermemarketing/folga/releases/download/v1.2/Folga-1.2.dmg" type="application/octet-stream" sparkle:edSignature="kQS0H97koW30d6sAmCOpg6i7Ss5D1+Da9/NUU+Ykp/eT3V8HC1afh6Rm89XHDpIRPgU7rmIgpgXQyBiQJYWTAw==" length="1388744"/>
     </item>
     <item>
       <title>Folga 1.1</title>

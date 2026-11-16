@@ -14,7 +14,8 @@ Uso e instalação: `README.md`. Aprendizados: `docs/bugs-aprendizados.md`.
 - `Cleaner.swift` — cache é apagado; conversas vão para o Lixo; `isSafe` bloqueia tudo fora da home; fechar/reabrir apps.
 - `Store.swift` — estado (seleção de IAs, opções, fases overview → review → confirm → cleaning → done).
 - `KeepAwake.swift` — asserções IOKit (display sleep + user activity a cada 20s), contador da barra de menus.
-- `Views.swift` — todas as telas. `Debug.swift` — flags de linha de comando.
+- `Views.swift` — todas as telas. `TopAnchor.swift` — mantém a janela colada sob a barra de menus quando o conteúdo muda de altura. `Debug.swift` — flags de linha de comando.
+- `README.md` bilíngue (EN para SEO + PT), `CONTRIBUTING.md`, licença MIT.
 
 ## Regras
 - Build só com Command Line Tools: não usar macros do SwiftUI (`@State`, `@Observable`, `#Preview`). Estado local via `Flag` + `@StateObject`.

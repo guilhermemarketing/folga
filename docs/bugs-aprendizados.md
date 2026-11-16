@@ -15,3 +15,13 @@
 - **Problema:** as pastas `models--*` mediam KB, mas o hub tinha 2,7 GB.
 - **Causa:** no layout novo, os arquivos de cada modelo são symlinks para `hub/blobs/<xx>/<hash>`, que é compartilhado.
 - **Solução:** seguir os symlinks e atribuir a cada modelo só os blobs que nenhum outro modelo referencia; apagar a pasta do modelo junto com esses blobs.
+
+## 2026-11-16 — Vão entre a barra de menus e a janela do Folga
+- **Problema:** depois de recolher "Desenvolvimento", a janela abria com um vão do tamanho da lista abaixo da barra de menus.
+- **Causa provável:** o AppKit redimensiona janelas a partir da borda de baixo; quando o conteúdo da `MenuBarExtra(.window)` encolhe, o topo desce. Não reproduz numa `NSWindow` comum com `NSHostingController`, e clique sintético no item de status não abre a janela, então não deu para medir automaticamente.
+- **Solução:** `TopAnchor` observa `didResize`/`didBecomeKey` da janela e reancora o topo sob a barra de menus.
+
+## 2026-11-16 — Binário de `swift build` sem achar o Sparkle
+- **Problema:** `.build/release/Folga --report` falhava com `Library not loaded: @rpath/Sparkle.framework`.
+- **Causa:** o rpath só tinha `@executable_path/../Frameworks` (layout do `.app`); no `swift build` o framework fica ao lado do binário.
+- **Solução:** adicionar também `-rpath @executable_path` no `Package.swift`.

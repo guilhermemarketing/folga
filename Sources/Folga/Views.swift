@@ -82,6 +82,7 @@ struct RootView: View {
             }
         }
         .frame(width: 340)
+        .background(TopAnchor())
         .animation(.snappy(duration: 0.25), value: phaseKey)
         .onAppear { store.refreshIfStale() }
     }

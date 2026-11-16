@@ -12,7 +12,8 @@ let package = Package(
             name: "Folga",
             dependencies: [.product(name: "Sparkle", package: "Sparkle")],
             path: "Sources/Folga",
-            linkerSettings: [.unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks"])]
+            linkerSettings: [.unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks",
+                                          "-Xlinker", "-rpath", "-Xlinker", "@executable_path"])]  // .app, bare swift build
         )
     ]
 )

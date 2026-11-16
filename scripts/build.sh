@@ -55,5 +55,5 @@ done
 codesign --force --sign "$ID" --timestamp=none "$APP"
 codesign --verify --deep --strict "$APP"
 mkdir -p dist && rm -rf dist/Folga.app && ditto "$APP" dist/Folga.app && rm -rf "$STAGE"
-codesign --verify --deep --strict dist/Folga.app
+codesign --verify --deep dist/Folga.app   # not --strict: iCloud re-adds attributes to this copy; the DMG is checked strictly
 echo "Pronto: dist/Folga.app ($MARKETING_VERSION, build $BUILD_NUMBER, assinado com: $ID)"

@@ -1,0 +1,9 @@
+.build/
+dist/
+.DS_Store
+.swiftpm/
+.sparkle/
+.keys/
+*.p12
+*.key
+*.zip

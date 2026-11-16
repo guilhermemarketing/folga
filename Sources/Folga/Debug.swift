@@ -52,6 +52,32 @@ enum Debug {
         print("deleted \(r.deleted) trashed \(r.trashed) failures \(r.failures)")
     }
 
+    /// Runs inside the real app: opens the menu bar window, expands and collapses
+    /// "Desenvolvimento", closes and reopens, and prints the gap under the menu bar each time.
+    static func schedulePanelProbe(_ c: MenuController) {
+        setvbuf(stdout, nil, _IOLBF, 0)
+        func report(_ label: String) {
+            print(String(format: "%@: vão sob a barra %.0f · altura %.0f", label, c.gapUnderMenuBar ?? -1, c.isShown ? NSApp.windows.first { $0 is FolgaPanel }!.frame.height : -1))
+        }
+        let steps: [(Double, () -> Void)] = [
+            (5, { c.store.devExpanded = false; c.show() }),
+            (1.5, { report("aberto, recolhido") }),
+            (0.1, { c.store.devExpanded = true }),
+            (1.5, { report("expandido") }),
+            (0.1, { c.store.devExpanded = false }),
+            (1.5, { report("recolhido de novo") }),
+            (0.1, { c.close() }),
+            (0.8, { c.show() }),
+            (1.5, { report("fechado e reaberto") }),
+            (0.1, { c.close(); exit(0) }),
+        ]
+        var delay = 0.0
+        for (wait, step) in steps {
+            delay += wait
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { MainActor.assumeIsolated { step() } }
+        }
+    }
+
     @MainActor
     static func snapshot(to dir: URL) {
         _ = NSApplication.shared

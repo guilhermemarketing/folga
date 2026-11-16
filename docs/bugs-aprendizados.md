@@ -30,3 +30,8 @@
 - **Problema:** `resource fork, Finder information, or similar detritus not allowed` ao assinar `dist/Folga.app`.
 - **Causa:** o iCloud Drive grava atributos estendidos nos arquivos e volta a gravar mesmo depois de um `xattr -cr`.
 - **Solução:** `build.sh` monta e assina o `.app` numa pasta temporária fora do iCloud e só então copia (`ditto`) para `dist/`.
+
+## 2026-11-16 — MenuBarExtra não respeita âncora no topo
+- **Problema:** mesmo com `TopAnchor`, expandir e recolher "Desenvolvimento" deixava um vão sob a barra de menus (v1.2).
+- **Causa:** a janela da `MenuBarExtra(.window)` é posicionada pelo próprio SwiftUI, que sobrescreve ajustes de frame feitos de fora.
+- **Solução:** `MenuController` com `NSStatusItem` + `NSPanel` próprios; `SizingHostingView` avisa quando o conteúdo muda de altura e o painel é redimensionado com o topo preso 4 pt abaixo do item. `--panel-probe` abre a janela real e mede o vão.

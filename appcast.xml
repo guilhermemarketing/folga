@@ -7,6 +7,15 @@
     <language>pt-BR</language>
     <!-- items -->
     <item>
+      <title>Folga 1.2</title>
+      <pubDate>Mon, 16 Nov 2026 19:24:46 +0000</pubDate>
+      <sparkle:version>3</sparkle:version>
+      <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<p>Corrige o espaço vazio entre a barra de menus e a janela do Folga (aparecia depois de recolher Desenvolvimento). README agora também em inglês, licença MIT e guia de contribuição.</p>]]></description>
+      <enclosure url="https://github.com/guilhermemarketing/folga/releases/download/v1.2/Folga-1.2.dmg" type="application/octet-stream" sparkle:edSignature="B6m6p/1XLUYrojAyPgSDkVT9NS0MrEo+bBwsTmWrMMalbvfeXeoU+z4PFmsLpCH4TEr328tTahvAIJ7h9RnQCQ==" length="1388836"/>
+    </item>
+    <item>
       <title>Folga 1.1</title>
       <pubDate>Mon, 16 Nov 2026 18:57:49 +0000</pubDate>
       <sparkle:version>2</sparkle:version>

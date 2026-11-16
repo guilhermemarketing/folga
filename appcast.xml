@@ -7,6 +7,15 @@
     <language>pt-BR</language>
     <!-- items -->
     <item>
+      <title>Folga 1.3</title>
+      <pubDate>Mon, 16 Nov 2026 19:35:48 +0000</pubDate>
+      <sparkle:version>4</sparkle:version>
+      <sparkle:shortVersionString>1.3</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<p>Corrige de vez o espaço vazio entre a barra de menus e a janela do Folga: a janela agora fica sempre colada sob a barra, mesmo depois de abrir e fechar Desenvolvimento.</p>]]></description>
+      <enclosure url="https://github.com/guilhermemarketing/folga/releases/download/v1.3/Folga-1.3.dmg" type="application/octet-stream" sparkle:edSignature="LqQX1ExjqsaKAX3Izn5QdmhMP3nk4NHVcGjRM874DXm2NRijbXYqquhdfCZ1aRjvUBtGaIobqfbSzG9jJu7WAw==" length="1395364"/>
+    </item>
+    <item>
       <title>Folga 1.2</title>
       <pubDate>Mon, 16 Nov 2026 19:24:46 +0000</pubDate>
       <sparkle:version>3</sparkle:version>
